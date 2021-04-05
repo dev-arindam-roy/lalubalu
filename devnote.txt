@@ -1,0 +1,16 @@
+composer require laravel/ui
+php artisan ui vue --auth
+npm run dev
+npm run prod
+npm run watch
+npm cache clean --force
+
+npm install vue-router --save
+npm install vue-loading-overlay --save 
+npm install vuelidate --save
+npm install --save vue2-smooth-scroll
+npm install cxlt-vue2-toastr --save
+npm install -S vue-sweetalert2
+npm install vue-html2canvas
+npm install vue-bootstrap-datetimepicker --save
+npm install jspdf --save
