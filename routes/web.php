@@ -13,11 +13,11 @@ use App\Http\Controllers\AppController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('phpinfo', function () {
+Route::get('/phpinfo', function () {
     echo phpinfo();
 });
 
-Route::get('cards', function () {
+Route::get('/cards', function () {
     $d = DB::table('dog_cards')->count();
     echo $d;
 });
