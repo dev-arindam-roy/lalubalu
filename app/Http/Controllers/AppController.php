@@ -70,7 +70,7 @@ class AppController extends Controller
             'gender' => ['required'],
             'owner_name' => ['bail', 'required', 'min:3'],
             'owner_contact_number' => ['bail', 'required', 'digits_between:10,12'],
-            'dog_image' => ['bail', 'required', 'image', 'mimes:jpeg,jpg,png', 'dimensions:min_width=300,min_height=180', 'max:5048'],
+            'dog_image' => ['bail', 'required', 'image', 'mimes:jpeg,jpg,png', 'max:5200'],
             'living_address' => ['bail', 'required'],
         ];
         $messages = [

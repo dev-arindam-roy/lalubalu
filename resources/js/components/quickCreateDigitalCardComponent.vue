@@ -57,7 +57,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="text-danger" v-if="!isDogImgExtValid">Image extension is wrong, only accept jpeg/png.</div>
-                                                <div class="text-danger" v-if="!isDogImgSizeValid && isDogImgExtValid">Image size is should less than 4mb.</div>
+                                                <div class="text-danger" v-if="!isDogImgSizeValid && isDogImgExtValid">Image size is should less than 5mb.</div>
                                                 <button type="button" v-show="isDogImgHasError" class="btn btn-sm btn-danger" v-on:click="resetDogImage">Reset</button>
                                             </div>
                                         </div>
@@ -310,7 +310,7 @@ export default {
                 _this.$refs.dogPhoto.value = null;
             }
             
-            if(fileSize >= 4000000) {
+            if(fileSize >= 5000000) {
                 _this.isDogImgSizeValid = false;
                 _this.displayDogImage = '/public/assets/images/wrongimage.png';
                 _this.isDogImgHasError = true;

@@ -10,7 +10,7 @@
                         <h1><strong>404! Sorry, Page Not Found</strong></h1>
                     </div>
                     <div class="download-action mt-3 text-center">
-                        <router-link class="btn btn-info primary-button" :to="{name: 'quick.root.index'}">Home, Start again?</router-link>
+                        <router-link class="btn btn-info primary-button" :to="{name: 'root.index'}">Home, Start again?</router-link>
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
