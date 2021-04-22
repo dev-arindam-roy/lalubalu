@@ -56,8 +56,8 @@
                                                 <img :src="displayDogImage" class="img-fluid img-thumbnail rounded dog-default-image">
                                             </div>
                                             <div class="col-sm-6">
-                                                <div class="text-danger" v-if="!isDogImgExtValid">Image extension is wrong.</div>
-                                                <div class="text-danger" v-if="!isDogImgSizeValid && isDogImgExtValid">Image size is should less than 2mb.</div>
+                                                <div class="text-danger" v-if="!isDogImgExtValid">Image extension is wrong, only accept jpeg/png.</div>
+                                                <div class="text-danger" v-if="!isDogImgSizeValid && isDogImgExtValid">Image size is should less than 4mb.</div>
                                                 <button type="button" v-show="isDogImgHasError" class="btn btn-sm btn-danger" v-on:click="resetDogImage">Reset</button>
                                             </div>
                                         </div>
@@ -118,9 +118,9 @@
                                             </div>
                                             <div class="text-danger" v-if="!$v.cardData.dogAddress.required && $v.cardData.dogAddress.$error">Please enter living address of the dog.</div>
                                         </div>
-                                        <div class="form-group text-right">
+                                        <!-- <div class="form-group text-right">
                                             <button type="button" class="btn btn-sm btn-light" @click="getBrowserLocation()"><i class="fas fa-map-marker-alt"></i> use GPS for address</button>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group" v-if="dogVaccinationList.length > 0">
                                             <label class="form-label">Dog Vaccination List:</label>
                                             <p v-for="item in dogVaccinationList" v-bind:key="item.id" class="vac-p">
@@ -133,10 +133,10 @@
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-info primary-button">Create & Download</button>
+                                        <button type="submit" class="btn btn100 btn-info primary-button">Create & Download</button>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <button type="button" class="btn btn-danger" v-on:click="resetAllData()">Cancel</button>
+                                        <button type="button" class="btn btn100 btn-danger" v-on:click="resetAllData()">Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +294,7 @@ export default {
             _this.isDogImgExtValid = true
             _this.isDogImgSizeValid = true
             _this.isDogImgHasError = false
-            let imgExtArr = ['jpg', 'png', 'jpeg', 'gif'];
+            let imgExtArr = ['jpg', 'png', 'jpeg'];
             let files = event.target.files;
             let fileLength = files.length;
             let fileName = files[0].name;
@@ -310,7 +310,7 @@ export default {
                 _this.$refs.dogPhoto.value = null;
             }
             
-            if(fileSize >= 2000000) {
+            if(fileSize >= 4000000) {
                 _this.isDogImgSizeValid = false;
                 _this.displayDogImage = '/public/assets/images/wrongimage.png';
                 _this.isDogImgHasError = true;
@@ -412,6 +412,7 @@ export default {
                 }
             })
             .catch(function (error) {
+                console.log(error);
                 _this.$swal.close();
                 _this.$root.isPageLoadingActive = false;
                 if (error.response.status == 422) {
@@ -466,5 +467,11 @@ p.vac-p {
     margin: 0;
     padding: 0;
     padding-top: 10px;
+}
+@media screen and (max-width: 992px) {
+  .btn100 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 </style>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use App\Traits\HelperTrait as AppHelper;
 use App\Models\DogVaccination;
@@ -69,7 +70,7 @@ class AppController extends Controller
             'gender' => ['required'],
             'owner_name' => ['bail', 'required', 'min:3'],
             'owner_contact_number' => ['bail', 'required', 'digits_between:10,12'],
-            'dog_image' => ['bail', 'required', 'image', 'mimes:jpeg,jpg,png', 'dimensions:min_width=300,min_height=180', 'max:2048'],
+            'dog_image' => ['bail', 'required', 'image', 'mimes:jpeg,jpg,png', 'dimensions:min_width=300,min_height=180', 'max:5048'],
             'living_address' => ['bail', 'required'],
         ];
         $messages = [
@@ -85,7 +86,7 @@ class AppController extends Controller
             'dog_image.required' => 'Dog image is required.',
             'dog_image.mimes' => 'Dog image extension incorrect.',
             'dog_image.dimensions' => 'Dog image required minimum [300x180].',
-            'dog_image.max' => 'Maximum image size 2mb',
+            'dog_image.max' => 'Maximum image size 4mb',
             'living_address.required' => 'Dog living address is required',
         ];
         $validation = $this->checkInputValidation($request->all(), $rules, $messages);
@@ -118,16 +119,26 @@ class AppController extends Controller
             $thumb_path = $destinationPath."/thumbs";
             $small_path = $destinationPath."/smalls";
             
-            $imgObj = Image::make($real_path);
-
-            $imgObj->resize(300, NULL, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($thumb_path . '/' . $file_newname);
-
-            $imgObj->resize(150, NULL, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($small_path . '/' . $file_newname);
-
+            $imageResize = false;
+            if ($file_ext == 'jpeg' || $file_ext == 'jpg') {
+                $imgObj = Image::make(imagecreatefromjpeg($img));
+                $imageResize = true;
+            } elseif ($file_ext == 'png') {
+                $imgObj = Image::make(imagecreatefrompng($img));
+                $imageResize = true;
+            } else {
+                $img->move($thumb_path, $file_newname);
+            }
+            
+            if ($imageResize) {
+                $imgObj->resize(300, NULL, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($thumb_path . '/' . $file_newname);
+                
+                $imgObj->resize(150, NULL, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($small_path . '/' . $file_newname);
+            }
             //$imgObj->resize(100, 100)->save($thumb_path . '/100/' . $file_newname);
 
             // $img->move($destinationPath, $file_newname);

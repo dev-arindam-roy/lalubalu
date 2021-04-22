@@ -84,7 +84,7 @@ const app = new Vue({
 
     },
     mounted() {
-
+        
     },
     el: '#app',
     router: webRoutes

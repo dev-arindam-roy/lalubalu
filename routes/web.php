@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
+use DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,14 @@ use App\Http\Controllers\AppController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('phpinfo', function () {
+    echo phpinfo();
+});
+
+Route::get('cards', function () {
+    $d = DB::table('dog_cards')->count();
+    echo $d;
+});
 
 Route::name('dog.breed.')->group(function () {
     Route::group(['prefix' => 'dog-breeds'], function() {

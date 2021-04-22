@@ -19,6 +19,7 @@ const webRoutes = new VueRouter({
         {
             path: '/',
             name: 'root.index',
+            redirect: { name: 'quick.digitalCard' }
         },
         {
             path: '/create-digital-card-for-dog',

@@ -10,11 +10,11 @@
                     <div class="download-action mt-3">
                         <div class="row">
                             <div class="col-md-8">
-                                <a :href="cardImage" class="btn btn-info primary-button" :download="cardName"><i class="fas fa-download"></i> Download As Image</a>
-                                <button type="button" class="btn btn-info primary-button" v-on:click="saveAsPDF()"><i class="fas fa-file-pdf"></i> Download As PDF</button>
+                                <a :href="cardImage" class="btn btn100 btn-info primary-button" :download="cardName"><i class="fas fa-download"></i> Download As Image</a>
+                                <button type="button" class="btn btn100 btn-info primary-button" v-on:click="saveAsPDF()"><i class="fas fa-file-pdf"></i> Download As PDF</button>
                             </div>
                             <div class="col-md-4 text-right">
-                                <button type="button" class="btn btn-danger" v-on:click="createNew()">Create New</button>
+                                <button type="button" class="btn btn100 btn-danger" v-on:click="createNew()">Create New</button>
                             </div>
                         </div>
                     </div>
@@ -95,5 +95,10 @@ export default {
 </script>
 
 <style scoped>
-
+@media screen and (max-width: 992px) {
+  .btn100 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
 </style>

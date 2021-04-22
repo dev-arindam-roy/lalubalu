@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark theme-dark-green-primary-bgcolor">
             <router-link class="navbar-brand" :to="{name: 'root.index'}">
                 <img src="/public/assets/images/logo.png" style="width:32px;">
-                <span><strong>Lalubalu</strong></span>
+                <span><strong>Lalubolu</strong></span>
             </router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
